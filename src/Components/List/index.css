@@ -1,0 +1,11 @@
+/* list */
+.list {
+  margin-top: 10px;
+}
+.list .listspan {
+  margin-left: 10px;
+}
+
+.list .listbutton {
+  float: right;
+}

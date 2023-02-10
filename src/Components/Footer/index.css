@@ -1,0 +1,10 @@
+/* footer */
+.footer {
+  margin-top: 10px;
+}
+.footer .footerspan {
+  margin-left: 10px;
+}
+.footer .footerbutton {
+  float: right;
+}
