@@ -5,6 +5,7 @@ export default class index extends Component {
   state = {
     mouse: false,
   };
+  // 鼠标移动变灰
   handlemouse = (flag) => {
     return () => {
       this.setState({ mouse: flag });
@@ -29,7 +30,7 @@ export default class index extends Component {
           {todos.map((todo) => {
             return (
               <li
-                style={{ backgroundColor: mouse ? "grey" : "white" }}
+                style={{ backgroundColor: mouse ? "grey" : "white" }}//鼠标移动变灰
                 key={todo.id}
                 onMouseEnter={this.handlemouse(true)}
                 onMouseLeave={this.handlemouse(false)}
