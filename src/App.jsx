@@ -12,12 +12,12 @@ export default class App extends Component {
       { id: 3, name: "shop", done: false },
     ],
   };
-  addtodo = (todoobj) => {
+  addTodo = (todoobj) => {
     const { todos } = this.state;
     const newobj = [todoobj, ...todos];
     this.setState({ todos: newobj });
   };
-  updatetodo = (id, done) => {
+  updateTodo = (id, done) => {
     const { todos } = this.state;
     const newobj = todos.map((todo) => {
       if (todo.id === id) {
@@ -26,21 +26,21 @@ export default class App extends Component {
     });
     this.setState({ todos: newobj });
   };
-  deletetodo = (id) => {
+  deleteTodo = (id) => {
     const { todos } = this.state;
     const newobj = todos.filter((todo) => {
       return todo.id !== id;
     });
     this.setState({ todos: newobj });
   };
-  checkalltodo = (done) => {
+  checkAllTodo = (done) => {
     const { todos } = this.state;
     const newobj = todos.map((todo) => {
       return { ...todo, done };
     });
     this.setState({ todos: newobj });
   };
-  clearalltodo = () => {
+  clearAllTodo = () => {
     const { todos } = this.state;
     const newobj = todos.filter((todo) => {
       return !todo.done;
@@ -52,16 +52,16 @@ export default class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          <Header addtodo={this.addtodo} />
+          <Header addTodo={this.addTodo} />
           <List
             todos={todos}
-            updatetodo={this.updatetodo}
-            deletetodo={this.deletetodo}
+            updateTodo={this.updateTodo}
+            deleteTodo={this.deleteTodo}
           />
           <Footer
             todos={todos}
-            checkalltodo={this.checkalltodo}
-            clearalltodo={this.clearalltodo}
+            checkAllTodo={this.checkAllTodo}
+            clearAllTodo={this.clearAllTodo}
           />
         </div>
       </div>

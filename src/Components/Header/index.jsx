@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import "./index.css";
 
 export default class index extends Component {
-  handlekeyup = (event) => {
+  handleKeyUp = (event) => {
     const { target, keyCode } = event;
     if (keyCode !== 13) return;
     if (target.value.trim() === "") {
@@ -11,14 +11,14 @@ export default class index extends Component {
       return;
     }
     const newobj = { id: nanoid(), name: target.value, done: false };
-    this.props.addtodo(newobj);
+    this.props.addTodo(newobj);
     target.value = "";
   };
   render() {
     return (
       <div className="header">
         <input
-          onKeyUp={this.handlekeyup}
+          onKeyUp={this.handleKeyUp}
           className="headerinput"
           type="text"
           placeholder="输入内容"

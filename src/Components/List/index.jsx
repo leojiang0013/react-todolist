@@ -1,56 +1,64 @@
 import React, { Component } from "react";
 import "./index.css";
 
-export default class index extends Component {
+class Item extends Component{
   state = {
     mouse: false,
   };
   // 鼠标移动变灰
-  handlemouse = (flag) => {
+  handleMouse = (flag) => {
     return () => {
       this.setState({ mouse: flag });
     };
   };
-  handlecheck = (id) => {
+  handleCheck = (id) => {
     return (event) => {
-      this.props.updatetodo(id, event.target.checked);
+      this.props.updateTodo(id, event.target.checked);
     };
   };
-  handledelete = (id) => {
+  handleDelete = (id) => {
     return (event) => {
-      this.props.deletetodo(id);
+      this.props.deleteTodo(id);
     };
   };
   render() {
-    const { todos } = this.props;
+    const { id,name,done } = this.props;
     const { mouse } = this.state;
+    return (
+      <li
+        style={{ backgroundColor: mouse ? "#ddd" : "white" }}//鼠标移动变灰
+        onMouseEnter={this.handleMouse(true)}
+        onMouseLeave={this.handleMouse(false)}
+      >
+        <label>
+          <input
+            type="checkbox"
+            checked={done}
+            onChange={this.handleCheck(id)}
+          />
+          <span className="listspan">{name}</span>
+          <button
+            onClick={this.handleDelete(id)}
+            style={{ display: mouse ? "inline-block" : "none" }}
+            className="listbutton"
+          >
+            删除
+          </button>
+        </label>
+      </li>
+    )
+  }
+}
+export default class index extends Component {
+  
+  render() {
+    const { todos } = this.props;
     return (
       <div className="list">
         <ul>
           {todos.map((todo) => {
             return (
-              <li
-                style={{ backgroundColor: mouse ? "grey" : "white" }}//鼠标移动变灰
-                key={todo.id}
-                onMouseEnter={this.handlemouse(true)}
-                onMouseLeave={this.handlemouse(false)}
-              >
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={todo.done}
-                    onChange={this.handlecheck(todo.id)}
-                  />
-                  <span className="listspan">{todo.name}</span>
-                  <button
-                    onClick={this.handledelete(todo.id)}
-                    style={{ display: mouse ? "inline-block" : "none" }}
-                    className="listbutton"
-                  >
-                    删除
-                  </button>
-                </label>
-              </li>
+              <Item key={todo.id} {...todo} updateTodo={this.props.updateTodo} deleteTodo={this.props.deleteTodo} />
             );
           })}
         </ul>
