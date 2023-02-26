@@ -5,7 +5,6 @@ class Item extends Component{
   state = {
     mouse: false,
   };
-  // 鼠标移动变灰
   handleMouse = (flag) => {
     return () => {
       this.setState({ mouse: flag });
@@ -26,7 +25,7 @@ class Item extends Component{
     const { mouse } = this.state;
     return (
       <li
-        style={{ backgroundColor: mouse ? "#ddd" : "white" }}//鼠标移动变灰
+        style={{ backgroundColor: mouse ? "#ddd" : "white" }}
         onMouseEnter={this.handleMouse(true)}
         onMouseLeave={this.handleMouse(false)}
       >
@@ -50,7 +49,6 @@ class Item extends Component{
   }
 }
 export default class index extends Component {
-  
   render() {
     const { todos } = this.props;
     return (

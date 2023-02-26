@@ -1,70 +1,59 @@
 import "./App.css";
-import Header from "./Components/Header";
-import List from "./Components/List";
-import Footer from "./Components/Footer";
-import React, { Component } from "react";
+import Header from "./Components_hooks/Header";
+import List from "./Components_hooks/List";
+import Footer from "./Components_hooks/Footer";
+import React, { useState } from "react";
 
-export default class App extends Component {
-  state = {
-    todos: [
-      { id: 1, name: "eat", done: true },
-      { id: 2, name: "play", done: false },
-      { id: 3, name: "shop", done: false },
-    ],
+// export const ListContext = React.createContext();
+
+export default function App() {
+  const [todos, setTodos] = useState([
+    { id: 1, name: "eat", done: true },
+    { id: 2, name: "play", done: false },
+    { id: 3, name: "shop", done: false },
+  ]);
+  //添加todo
+  const addTodo = (todo) => {
+    setTodos([ todo, ...todos ]);
   };
-  addTodo = (todoobj) => {
-    const { todos } = this.state;
-    const newobj = [todoobj, ...todos];
-    this.setState({ todos: newobj });
-  };
-  updateTodo = (id, done) => {
-    const { todos } = this.state;
-    const newobj = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, done };
-      } else return todo;
+  //更新是否选中的状态
+  const updateTodo = (id, done) => {
+    const newtodos = todos.map((todo) => {
+      if (todo.id === id) return { ...todo, done };
+      else return todo;
     });
-    this.setState({ todos: newobj });
+    setTodos(newtodos);
   };
-  deleteTodo = (id) => {
-    const { todos } = this.state;
-    const newobj = todos.filter((todo) => {
-      return todo.id !== id;
-    });
-    this.setState({ todos: newobj });
+  //删除todo
+  const deleteTodo = (id) => {
+    const newtodos = todos.filter((todo) => todo.id !== id);
+    setTodos(newtodos);
   };
-  checkAllTodo = (done) => {
-    const { todos } = this.state;
-    const newobj = todos.map((todo) => {
+  //全选todo
+  const checkAllTodo = (done) => {
+    const newtodos = todos.map((todo) => {
       return { ...todo, done };
     });
-    this.setState({ todos: newobj });
+    setTodos(newtodos);
   };
-  clearAllTodo = () => {
-    const { todos } = this.state;
-    const newobj = todos.filter((todo) => {
-      return !todo.done;
-    });
-    this.setState({ todos: newobj });
+  //清除已完成任务
+  const clearAllTodo = () => {
+    const newtodos = todos.filter((todo) => !todo.done);
+    setTodos(newtodos);
   };
-  render() {
-    const { todos } = this.state;
-    return (
-      <div className="App">
-        <div className="container">
-          <Header addTodo={this.addTodo} />
-          <List
-            todos={todos}
-            updateTodo={this.updateTodo}
-            deleteTodo={this.deleteTodo}
-          />
-          <Footer
-            todos={todos}
-            checkAllTodo={this.checkAllTodo}
-            clearAllTodo={this.clearAllTodo}
-          />
-        </div>
+  return (
+    <div className="App">
+      <div className="container">
+        <Header addTodo={addTodo} />
+        {/* <ListContext.Provider value={{ todos, updateTodo, deleteTodo }}> */}
+          <List todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+        {/* </ListContext.Provider> */}
+        <Footer
+          todos={todos}
+          checkAllTodo={checkAllTodo}
+          clearAllTodo={clearAllTodo}
+        />
       </div>
-    );
-  }
+    </div>
+  );
 }
