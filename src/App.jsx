@@ -4,8 +4,6 @@ import List from "./Components_hooks/List";
 import Footer from "./Components_hooks/Footer";
 import React, { useState } from "react";
 
-// export const ListContext = React.createContext();
-
 export default function App() {
   const [todos, setTodos] = useState([
     { id: 1, name: "eat", done: true },
@@ -45,9 +43,7 @@ export default function App() {
     <div className="App">
       <div className="container">
         <Header addTodo={addTodo} />
-        {/* <ListContext.Provider value={{ todos, updateTodo, deleteTodo }}> */}
-          <List todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
-        {/* </ListContext.Provider> */}
+        <List todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
         <Footer
           todos={todos}
           checkAllTodo={checkAllTodo}

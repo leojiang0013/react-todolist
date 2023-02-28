@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { ListContext } from "../../App";
 import "./index.css";
 
 export default function index(props) {
@@ -16,11 +15,6 @@ export default function index(props) {
 }
 
 function Item(props) {
-  // const {
-  //   todos,
-  //   updateTodo,
-  //   deleteTodo,
-  // } = useContext(ListContext);
   const { id, name, done, updateTodo, deleteTodo } = props;
   const [mouse, setMouse] = useState(false);
   //设置鼠标是否悬浮标志值
